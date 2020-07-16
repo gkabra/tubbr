@@ -38,6 +38,18 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
         imageDefaults.setImage(image: nil, forKey: "selectedImage")
         // Do any additional setup after loading the view.
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+
+        //Take permission to access library initially
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    print("OKAY")
+                } else {
+                    print("NOTOKAY")
+                }
+            })
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
