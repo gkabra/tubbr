@@ -108,7 +108,9 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
    }
 
     @IBAction func openSpotify(_ sender: UIButton) {
+        //Resetting values
         self.musicImageView.image = nil
+        UserDefaults.standard.set(nil, forKey: "DownloadedTrackFile")
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         if let spotifyListVC = storyboard.instantiateViewController(withIdentifier: "SpotifyViewController") as? SpotifyViewController{
             spotifyListVC.modalPresentationStyle = .currentContext
@@ -264,6 +266,8 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
                                self.present(alertController, animated: true, completion: nil)
                                 self.imageView.image = nil
                                 self.musicImageView.image = nil
+                                self.isImageSelected = false
+                                UserDefaults.standard.set(nil, forKey: "DownloadedTrackFile")
 
                             }
 
@@ -282,6 +286,8 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
                            self.stopAnimating(nil)
                        }
                        self.musicImageView.image = nil
+                       self.isImageSelected = false
+                       UserDefaults.standard.set(nil, forKey: "DownloadedTrackFile")
                 }
                }
        }
